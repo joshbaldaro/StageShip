@@ -95,7 +95,6 @@ def setup_logging(level: str = "INFO") -> None:
         ],
     )
 
-
 def main():
     args = _parser()
 
@@ -112,9 +111,8 @@ def main():
         from stageship.core import flatten
         flatten.flatten(args.file)
     elif args.cmd == "ship":
-        # from .commands import ship
-        # ship(args.file, flatten=args.flatten, torrent=args.torrent)
-        print(f"Shipping {args.file}...")
+        from stageship.core import ship
+        ship.ship(args.file, flatten=args.flatten, torrent=args.torrent)
     elif args.cmd == "checkhealth":
         try:
             from pxr import Usd
