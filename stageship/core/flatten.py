@@ -8,12 +8,16 @@ logger = _logging.getLogger(__name__)
 
 
 def flatten(file, output=None):
+    logger.info(f"Flattening {file}...")
+
     stage = _Usd.Stage.Open(file)
 
     if not output:
         extension = _Path(file).suffix
         output = _Path(file).with_suffix(f".flattened{extension}")
-        _logging.debug(f"No output path provided, using {output} as output path")
+        _logging.warning(f"No output path provided, using {output} as output path")
 
     flattened_layer = stage.Flatten()
     flattened_layer.Export(str(output))
+
+    logger.info(f"Flattened {file} to {output}")

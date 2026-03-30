@@ -3,11 +3,15 @@ import logging as _logging
 from pxr import Usd as _Usd, Sdf as _Sdf, UsdShade as _UsdShade, UsdUtils as _UsdUtils, Ar as _Ar
 from tqdm import tqdm as _tqdm
 
+from stageship.helpers.dependency_data import DependencyData
+
 
 logger = _logging.getLogger(__name__)
 
 
 def analyse(file):
+    logger.info(f"Analysing {file}...")
+
     stage = _Usd.Stage.Open(file)
 
     # dependencies = _UsdUtils.ComputeAllDependencies(file)
@@ -20,6 +24,10 @@ def analyse(file):
         "textures": find_texture_dependencies(stage),
     }
 
+    dependencies = DependencyData(**dependencies)
+    logger.info(f"Found {dependencies.total_count()} dependencies")
+    logger.info(f"Dependencies: {dependencies.summary()}")
+
     return dependencies
 
 def find_sublayers(stage: _Usd.Stage) -> list:
@@ -31,7 +39,9 @@ def find_sublayers(stage: _Usd.Stage) -> list:
         path = _Sdf.Layer.FindRelativeToLayer(root, layer)
         if path:
             dependencies.append(path)
+            logger.debug(f"Found sublayer {path}")
 
+    logger.info(f"Found {len(dependencies)} sublayers")
     return dependencies
 
 def find_references(stage: _Usd.Stage) -> list:
@@ -52,6 +62,7 @@ def find_references(stage: _Usd.Stage) -> list:
                 dependencies.append(reference.assetPath)
                 logger.debug(f"Reference Found: {reference.assetPath} on {prim.GetPath()}")
 
+    logger.info(f"Found {len(dependencies)} references")
     return dependencies
 
 def find_payloads(stage: _Usd.Stage) -> list:
@@ -72,6 +83,7 @@ def find_payloads(stage: _Usd.Stage) -> list:
                 dependencies.append(payload.assetPath)
                 logger.debug(f"Payload Found: {payload.assetPath} on {prim.GetPath()}")
 
+    logger.info(f"Found {len(dependencies)} payloads")
     return dependencies
 
 def find_texture_dependencies(stage: _Usd.Stage) -> list:
@@ -92,4 +104,5 @@ def find_texture_dependencies(stage: _Usd.Stage) -> list:
     for prim in material_prims:
         find_texture_inputs(prim)
 
+    logger.info(f"Found {len(dependencies)} texture dependencies")
     return dependencies

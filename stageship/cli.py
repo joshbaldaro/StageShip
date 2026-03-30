@@ -106,16 +106,11 @@ def main():
     setup_logging(level=log_level)
 
     if args.cmd == "analyse":
-        _logging.log(_logging.INFO, f"Analysing {args.file}...")
         from stageship.core import analyse
-        dependencies = DependencyData(**analyse.analyse(args.file))
-        _logging.log(_logging.INFO, f"Found {dependencies.total_count()} dependencies")
-        _logging.log(_logging.INFO, f"Dependencies: {dependencies.summary()}")
+        analyse.analyse(args.file)
     elif args.cmd == "flatten":
-        _logging.log(_logging.INFO, f"Flattening {args.file}...")
         from stageship.core import flatten
         flatten.flatten(args.file)
-        _logging.log(_logging.INFO, f"Flattening complete, output file: {args.output}")
     elif args.cmd == "ship":
         # from .commands import ship
         # ship(args.file, flatten=args.flatten, torrent=args.torrent)
