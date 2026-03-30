@@ -1,5 +1,7 @@
 # StageShip
 
+## 🚧 Under Construction 🚧
+
 A CLI tool to automate the analysis, flattening and packaging of USD stages for efficient transfer and delivery
 
 
@@ -58,4 +60,3 @@ For development:
 git clone <repo-url>
 cd StageShip
 pip install -e .
->>>>>>> f7670ac (updated readme)
