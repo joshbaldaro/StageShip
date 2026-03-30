@@ -8,7 +8,7 @@ from stageship.helpers.dependency_data import DependencyData
 DESCRIPTION = """
 ===============================================================================
 StageShip CLI
-StageShip is a tool for etc etc etc
+StageShip is a tool for analysing USD stages for external dependencies, flattening composed scenes, and packaging them for delivery.
 ===============================================================================
 """
 
