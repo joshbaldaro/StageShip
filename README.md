@@ -1,7 +1,7 @@
 # StageShip
-<<<<<<< HEAD
+
 A CLI tool to automate the analysis, flattening and packaging of USD stages for efficient transfer and delivery
-=======
+
 
 **StageShip** is a Python-based CLI tool designed to automate the analysis, flattening, and packaging of USD (Universal Scene Description) stages for efficient transfer and delivery.
 
