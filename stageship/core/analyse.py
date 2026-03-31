@@ -59,7 +59,10 @@ def find_references(stage: _Usd.Stage) -> list:
             all_references.extend(reference_list.orderedItems)
 
             for reference in all_references:
-                dependencies.append(reference.assetPath)
+                if not reference.assetPath:
+                    continue
+                if reference.assetPath not in dependencies:
+                    dependencies.append(reference.assetPath)
                 logger.debug(f"Reference Found: {reference.assetPath} on {prim.GetPath()}")
 
     logger.info(f"Found {len(dependencies)} references")
@@ -80,7 +83,10 @@ def find_payloads(stage: _Usd.Stage) -> list:
             all_payloads.extend(payload_list.orderedItems)
 
             for payload in all_payloads:
-                dependencies.append(payload.assetPath)
+                if not payload.assetPath:
+                    continue
+                if payload.assetPath not in dependencies:
+                    dependencies.append(payload.assetPath)
                 logger.debug(f"Payload Found: {payload.assetPath} on {prim.GetPath()}")
 
     logger.info(f"Found {len(dependencies)} payloads")
