@@ -2,8 +2,6 @@ import argparse as _argparse
 import logging as _logging
 import sys as _sys
 
-from stageship.helpers.dependency_data import DependencyData
-
 
 DESCRIPTION = """
 ===============================================================================

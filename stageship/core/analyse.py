@@ -1,6 +1,6 @@
 import logging as _logging
 
-from pxr import Usd as _Usd, Sdf as _Sdf, UsdShade as _UsdShade, UsdUtils as _UsdUtils, Ar as _Ar
+from pxr import Usd as _Usd, Sdf as _Sdf, UsdShade as _UsdShade
 from tqdm import tqdm as _tqdm
 
 from stageship.helpers.dependency_data import DependencyData
@@ -36,8 +36,8 @@ def analyse(file: str) -> DependencyData:
 
     # Convert the dependency dictionary into a DependencyData object for easier handling and summary
     dependencies = DependencyData(**dependencies)
-    logger.info(f"Found {dependencies.total_count()} dependencies")
-    logger.info(f"Dependencies: {dependencies.summary()}")
+    logger.info(f"Found {dependencies.total_count} dependencies")
+    logger.info(f"Dependencies: {dependencies.summary}")
 
     return dependencies
 
