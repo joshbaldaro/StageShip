@@ -12,6 +12,7 @@ StageShip is a tool for analysing USD stages for external dependencies, flatteni
 ===============================================================================
 """
 
+
 def _parser():
     parser = _argparse.ArgumentParser(
         formatter_class=_argparse.RawTextHelpFormatter,
@@ -84,6 +85,7 @@ def _parser():
 
     return parser.parse_args()
 
+
 def setup_logging(level: str = "INFO") -> None:
     numeric_level = getattr(_logging, level.upper(), _logging.INFO)
 
@@ -94,6 +96,7 @@ def setup_logging(level: str = "INFO") -> None:
             _logging.StreamHandler(_sys.stdout)
         ],
     )
+
 
 def main():
     args = _parser()
@@ -119,6 +122,7 @@ def main():
             print("USD python bindings: OK")
         except Exception as e:
             print(f"USD python bindings: {e}")
+
 
 if __name__ == "__main__":
     main()

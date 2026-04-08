@@ -9,6 +9,14 @@ logger = _logging.getLogger(__name__)
 
 
 def create_torrent(file: str, output: str = None) -> str:
+    """
+    Create a torrent file for the given file. This will create a torrent file that can be used to share the file with
+    others.
+
+    :param file: The file to create a torrent for
+    :param output: The output file for the torrent (default: <input>.torrent)
+    :return: The path to the created torrent file
+    """
     if not _os.path.exists(file):
         raise FileNotFoundError(f"File {file} does not exist")
 
