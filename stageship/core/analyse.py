@@ -163,7 +163,7 @@ def find_texture_dependencies(stage: _Usd.Stage) -> list:
             elif child.IsA(_UsdShade.NodeGraph):
                 find_texture_inputs(child)
 
-    for prim in material_prims:
+    for prim in _tqdm(material_prims, total=len(material_prims), desc="Searching for Texture Dependencies"):
         find_texture_inputs(prim)
 
     logger.info(f"Found {len(dependencies)} texture dependencies")

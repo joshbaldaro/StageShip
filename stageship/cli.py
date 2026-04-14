@@ -72,6 +72,10 @@ def _parser():
         action="store_true",
     )
     ship_parser.add_argument(
+        "--package",
+        action="store_true",
+    )
+    ship_parser.add_argument(
         "--torrent",
         action="store_true",
     )
@@ -113,7 +117,7 @@ def main():
         flatten.flatten(args.file)
     elif args.cmd == "ship":
         from stageship.core import ship
-        ship.ship(args.file, flatten=args.flatten, torrent=args.torrent)
+        ship.ship(args.file, flatten=args.flatten, package=args.package, torrent=args.torrent)
     elif args.cmd == "checkhealth":
         try:
             from pxr import Usd

@@ -7,14 +7,14 @@ from pxr import Usd as _Usd
 logger = _logging.getLogger(__name__)
 
 
-def flatten(file, output=None) -> None:
+def flatten(file, output=None) -> str:
     """
     Flatten a USD file, which will resolve all sublayers, references, and payloads into a single layer. This is useful
     for shipping a USD file, as it will ensure that all USD file dependencies are collapsed into the final file.
 
     :param file: The USD file to flatten
     :param output: The output file for the flattened USD (default: <input>_flattened.usd)
-    :return: None
+    :return: The path to the flattened USD file
     """
     logger.info(f"Flattening {file}...")
 
@@ -29,3 +29,5 @@ def flatten(file, output=None) -> None:
     flattened_layer.Export(str(output))
 
     logger.info(f"Flattened {file} to {output}")
+
+    return str(output)
