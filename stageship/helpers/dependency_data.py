@@ -23,6 +23,10 @@ class DependencyData:
         return self.sublayers_count + self.references_count + self.payloads_count + self.textures_count
 
     @property
+    def layer_count(self) -> int:
+        return self.sublayers_count + self.references_count + self.payloads_count
+
+    @property
     def summary(self) -> dict:
         return {
             "sublayers": self.sublayers_count,

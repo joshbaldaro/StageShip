@@ -25,20 +25,19 @@ def ship(file: str, flatten: bool = False, package: bool = False, torrent: bool 
     logger.info(f"Shipping {file}...")
 
     dependencies = _analyse.analyse(file)
-    if dependencies.total_count > 0 and not flatten:
+    if dependencies.layer_count > 0 and not flatten:
         flatten = _confirmation.confirm(f"{file} has {dependencies.total_count} dependencies. Shipping without flattening may "
                               f"result in missing files. Would you like to flatten the stage now?")
 
-    flattened_path = None
     if flatten:
-        flattened_path = _flatten.flatten(file)
+        file = _flatten.flatten(file)
 
-    if flattened_path and dependencies.textures_count > 0:
+    if dependencies.textures_count > 0:
         package = _confirmation.confirm(f"Flattening does not resolve texture dependencies. Would you like to usd USD Zip to include "
                        f"textures in the shipped file?")
 
     if package:
-        _package.package(flattened_path, dependencies=dependencies.textures)
+        file = _package.package(file, dependencies=dependencies.textures)
 
     if torrent:
         _torrent.create_torrent(file)
