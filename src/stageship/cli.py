@@ -85,7 +85,7 @@ def _parser():
         help="Enable verbose logging",
     )
 
-    return parser.parse_args()
+    return parser
 
 
 def setup_logging(level: str = "INFO") -> None:
@@ -101,10 +101,11 @@ def setup_logging(level: str = "INFO") -> None:
 
 
 def main():
-    args = _parser()
+    args = _parser().parse_args()
 
     if not args.cmd:
         _parser().print_help()
+        return
 
     log_level = "DEBUG" if args.verbose else "INFO"
     setup_logging(level=log_level)

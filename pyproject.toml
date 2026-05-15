@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stageship"
+version = "0.0.1"
+description = "Automate the analysis, flattening and packaging of USD stages for efficient transfer and delivery"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "usd-core",
+]
+
+[project.scripts]
+stageship = "stageship.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
